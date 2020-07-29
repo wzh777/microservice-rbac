@@ -39,7 +39,6 @@ public class UserController {
     public String queryList() {
         List<UserDto> userDtolist = userService.list();
         List<UserVo> userVos = ColaBeanUtils.copyListProperties(userDtolist, UserVo::new);
-
         return JSON.toJSONString(userVos);
     }
 
@@ -67,11 +66,9 @@ public class UserController {
     @PostMapping("/querybyname")
     public String querybyname(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
-
         BeanUtils.copyProperties(userVo, userDto);
         UserDto userDto1 = userService.getByName(userDto);
         BeanUtils.copyProperties(userDto1, userVo);
-
         return JSON.toJSONString(userVo);
     }
 

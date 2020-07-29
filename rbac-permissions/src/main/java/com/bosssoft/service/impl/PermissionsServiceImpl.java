@@ -11,6 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.ColaBeanUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,6 +29,12 @@ public class PermissionsServiceImpl implements PermissionsService {
     @Autowired
     private PermissionsMapper permissionsMapper;
 
+    /**
+     * 根据id更新权限
+     *
+     * @param permissionsDto
+     * @return
+     */
     @Override
     public boolean updateById(PermissionsDto permissionsDto) {
         Permissions permissions = new Permissions();
@@ -38,6 +47,12 @@ public class PermissionsServiceImpl implements PermissionsService {
         }
     }
 
+    /**
+     * 插入权限
+     *
+     * @param permissionsDto
+     * @return
+     */
     @Override
     public boolean save(PermissionsDto permissionsDto) {
         Permissions permissions = new Permissions();
@@ -50,6 +65,12 @@ public class PermissionsServiceImpl implements PermissionsService {
         }
     }
 
+    /**
+     * 根据id删除权限
+     *
+     * @param permissionsDto
+     * @return
+     */
     @Override
     public boolean removeById(PermissionsDto permissionsDto) {
         int result = permissionsMapper.deleteById(permissionsDto.getId());
@@ -60,9 +81,16 @@ public class PermissionsServiceImpl implements PermissionsService {
         }
     }
 
+    /**
+     * 获取权限列表
+     *
+     * @return List<PermissionsDto>
+     */
     @Override
-    public String list() {
-        return JSON.toJSONString(permissionsMapper.selectList(null));
+    public List<PermissionsDto> list() {
+        List<Permissions> permissions = permissionsMapper.selectList(null);
+        List<PermissionsDto> permissionsDtos = ColaBeanUtils.copyListProperties(permissions, PermissionsDto::new);
+        return permissionsDtos;
     }
 
 }

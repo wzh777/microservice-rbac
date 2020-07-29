@@ -64,6 +64,11 @@ public interface UserService {
     UserDto login(UserDto userDto);
 
 
+    /**
+     * 管理用户角色关系
+     * @param userRoleVo
+     * @return
+     */
     boolean managerole(UserRoleVo userRoleVo);
 
 }

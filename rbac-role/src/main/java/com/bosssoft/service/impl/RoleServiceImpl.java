@@ -38,6 +38,12 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private PerRoleMapper perRoleMapper;
 
+    /**
+     * 通过id更新角色
+     *
+     * @param roleDto
+     * @return
+     */
     @Override
     public boolean updateById(RoleDto roleDto) {
         Role role = new Role();
@@ -50,6 +56,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * 插入角色
+     *
+     * @param roleDto
+     * @return
+     */
     @Override
     public boolean save(RoleDto roleDto) {
         Role role = new Role();
@@ -62,6 +74,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * 通过id删除角色
+     *
+     * @param roleDto
+     * @return
+     */
     @Override
     public boolean removeById(RoleDto roleDto) {
         int result = roleMapper.deleteById(roleDto.getId());
@@ -72,29 +90,40 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * 查询角色列表
+     *
+     * @return
+     */
     @Override
     public List<RoleDto> list() {
         List<RoleDto> queryperbyrole = roleMapper.queryperbyrole();
         return queryperbyrole;
     }
 
+    /**
+     * 管理角色权限关系
+     *
+     * @param perRoleVo
+     * @return
+     */
     @Override
     public boolean managerole(PerRoleVo perRoleVo) {
-
+        // 对前端传输的数据进行分词，得到更新的权限列表
         String str = perRoleVo.getPermissionsList().toString();
         int start = str.indexOf("[");
         int end = str.indexOf("]");
-
         String[] split = str.substring(start + 1, end).split(", ");
         ArrayList<Integer> list = new ArrayList<>();
         for (String s : split) {
             list.add(Integer.parseInt(s));
         }
+        // 删除原有的用户角色关系
         UpdateWrapper<PerRole> wrapper = new UpdateWrapper<>();
         wrapper.eq("rid", perRoleVo.getId());
         perRoleMapper.delete(wrapper);
-
-        int result= 0;
+        // 插入新的角色权限关系，result用于记录插入是否成功
+        int result = 0;
         for (Integer integer : list) {
             PerRole perRole = new PerRole();
             perRole.setRid(perRoleVo.getId());
@@ -102,9 +131,9 @@ public class RoleServiceImpl implements RoleService {
             perRoleMapper.insert(perRole);
             result++;
         }
-        if (result == list.size()){
+        if (result == list.size()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

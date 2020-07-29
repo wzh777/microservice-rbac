@@ -3,7 +3,6 @@ package com.bosssoft.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.bosssoft.dto.UserDto;
-import com.bosssoft.mapper.PerRoleMapper;
 import com.bosssoft.mapper.UserRoleMapper;
 import com.bosssoft.po.User;
 import com.bosssoft.mapper.UserMapper;
@@ -12,9 +11,6 @@ import com.bosssoft.service.UserService;
 import com.bosssoft.vo.UserRoleVO.UserRoleVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,13 +31,14 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private PerRoleMapper perRoleMapper;
-
-
-    @Autowired
     UserRoleMapper userRoleMapper;
 
-
+    /**
+     * 通过id修改用户信息
+     *
+     * @param userDto
+     * @return boolean值
+     */
     @Override
     public boolean updateById(UserDto userDto) {
         User user = new User();
@@ -54,6 +51,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 插入用户
+     *
+     * @param userDto
+     * @return boolean值
+     */
     @Override
     public boolean save(UserDto userDto) {
         User user = new User();
@@ -66,6 +69,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 删除用户
+     *
+     * @param userDto
+     * @return boolean值
+     */
     @Override
     public boolean removeById(UserDto userDto) {
         int result = userMapper.deleteById(userDto.getId());
@@ -76,12 +85,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 查询用户列表
+     *
+     * @param
+     * @return List
+     */
     @Override
     public List<UserDto> list() {
         List<UserDto> userDtos = userMapper.queryperList();
         return userDtos;
     }
 
+    /**
+     * 通过名字查询用户
+     *
+     * @param userDto
+     * @return UserDto
+     */
     @Override
     public UserDto getByName(UserDto userDto) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -96,6 +117,12 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    /**
+     * 登录验证接口
+     *
+     * @param userDto
+     * @return UserDto
+     */
     @Override
     public UserDto login(UserDto userDto) {
         UserDto user = userMapper.queryper(userDto.getName());
@@ -116,19 +143,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean managerole(UserRoleVo userRoleVo) {
+        // 对前端传输的数据进行分词，得到更新的角色列表
         String str = userRoleVo.getRoleList().toString();
         int start = str.indexOf("[");
         int end = str.indexOf("]");
-
         String[] split = str.substring(start + 1, end).split(", ");
         ArrayList<Integer> list = new ArrayList<>();
         for (String s : split) {
             list.add(Integer.parseInt(s));
         }
+        // 删除原有的用户角色关系
         UpdateWrapper<UserRole> wrapper = new UpdateWrapper<>();
         wrapper.eq("uid", userRoleVo.getId());
         userRoleMapper.delete(wrapper);
-
+        // 插入新的用户角色关系，result用于记录插入是否成功
         int result = 0;
         for (Integer integer : list) {
             UserRole userRole = new UserRole();
@@ -144,7 +172,6 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-
 
 
 }

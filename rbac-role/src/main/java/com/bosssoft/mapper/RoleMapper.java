@@ -20,5 +20,9 @@ import java.util.List;
 @Component
 @Repository
 public interface RoleMapper extends BaseMapper<Role> {
+    /**
+     * 自定义一对多查询角色列表
+     * @return
+     */
     List<RoleDto> queryperbyrole();
 }
