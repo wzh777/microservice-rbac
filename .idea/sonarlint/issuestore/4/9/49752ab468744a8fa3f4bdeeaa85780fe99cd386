@@ -1,0 +1,14 @@
+
+N
+java:S1128"1Remove this unused import 'com.bosssoft.po.Role'.(óÈó‘8›Ö•Ê¸.
+c
+java:S1126."AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8¼é‘Ê¸.
+u
+java:S1128
+"XRemove this unused import 'com.baomidou.mybatisplus.extension.service.impl.ServiceImpl'.(ÇÙ„Ü8ŸÙÊ¸.
+c
+java:S11268"AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8¼é‘Ê¸.
+c
+java:S1126""AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8¼é‘Ê¸.
+W
+java:S1128"5Remove this unused import 'com.bosssoft.dto.RoleDto'.(Î©¸İùÿÿÿÿ8´á“Ê¸.
