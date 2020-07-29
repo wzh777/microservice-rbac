@@ -5,7 +5,7 @@
     <resultMap id="roleper" type="RoleDto">
         <id property="id" column="id"/>
         <result property="type" column="type"/>
-        <collection property="permissions" column="id" javaType="java.com.bosssoft.util.List" select="getper"/>
+        <collection property="permissions" column="id" javaType="java.util.List" select="getper"/>
     </resultMap>
 
 

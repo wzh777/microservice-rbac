@@ -2,7 +2,7 @@ package com.bosssoft.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bosssoft.entity.dto.UserDto;
-import com.bosssoft.entity.po.User;
+import com.bosssoft.entity.po.UserPO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @description
  */
 @Component
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<UserPO> {
     /**
      * 自定义一对多查询接口，通过用户名查询出用户信息，包括用户的角色和权限
      *

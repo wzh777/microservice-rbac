@@ -1,27 +1,0 @@
-
-R
-java:S1128"6Remove this unused import 'com.alibaba.fastjson.JSON'.(Ö¢å$8Ñ—ü¸.
-ˆ
-java:S1488M"fImmediately return this expression instead of assigning it to the temporary variable "queryperbyrole".(¨©ÊÊüÿÿÿÿ8Ñ—ü¸.
-c
-java:S1126:"AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8şç¶Ç¸.
-W
-java:S1128"5Remove this unused import 'com.bosssoft.dto.UserDto'.(¥ñÑåÿÿÿÿÿ8Â³ºÇ¸.
-W
-java:S1128"5Remove this unused import 'com.bosssoft.po.UserRole'.(¡É±¹úÿÿÿÿ8Â†ëü¸.
-S
-java:S1128"1Remove this unused import 'com.bosssoft.po.User'.(ôíÉ¡úÿÿÿÿ8£Í»Ç¸.
-c
-java:S1126."AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8şç¶Ç¸.
-^
-java:S1126i"AReplace this if-then-else statement by a single return statement.(ƒÜƒ¹8Ê’âü¸.
-u
-java:S1128"XRemove this unused import 'com.baomidou.mybatisplus.extension.service.impl.ServiceImpl'.(ÇÙ„Ü8À¹¦ª¸.
-c
-java:S1126D"AReplace this if-then-else statement by a single return statement.(™¦Ôêøÿÿÿÿ8şç¶Ç¸.
-h
-java:S3027U"FPut single-quotes around '[' to use the faster "indexOf(char)" method.(Ÿ”¼¢ûÿÿÿÿ8Ê’âü¸.
-z
-java:S1128"XRemove this unused import 'com.baomidou.mybatisplus.core.conditions.query.QueryWrapper'.(ÓÆÂæÿÿÿÿÿ8¦‹¹Ç¸.
-c
-java:S3027V"FPut single-quotes around ']' to use the faster "indexOf(char)" method.(¤±‰8Ê’âü¸.

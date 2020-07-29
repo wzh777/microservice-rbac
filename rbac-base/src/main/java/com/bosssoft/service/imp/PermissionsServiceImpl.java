@@ -1,9 +1,9 @@
 package com.bosssoft.service.imp;
 
-import com.bosssoft.entity.dto.PermissionsDto;
-import com.bosssoft.entity.po.Permissions;
-import com.bosssoft.mapper.PermissionsMapper;
 import com.bosssoft.service.PermissionsService;
+import com.bosssoft.entity.dto.PermissionsDto;
+import com.bosssoft.entity.po.PermissionsPO;
+import com.bosssoft.mapper.PermissionsMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,14 +33,10 @@ public class PermissionsServiceImpl implements PermissionsService {
      */
     @Override
     public boolean updateById(PermissionsDto permissionsDto) {
-        Permissions permissions = new Permissions();
+        PermissionsPO permissions = new PermissionsPO();
         BeanUtils.copyProperties(permissionsDto, permissions);
         int result = permissionsMapper.updateById(permissions);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -51,14 +47,10 @@ public class PermissionsServiceImpl implements PermissionsService {
      */
     @Override
     public boolean save(PermissionsDto permissionsDto) {
-        Permissions permissions = new Permissions();
+        PermissionsPO permissions = new PermissionsPO();
         BeanUtils.copyProperties(permissionsDto, permissions);
         int result = permissionsMapper.insert(permissions);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -70,11 +62,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     @Override
     public boolean removeById(PermissionsDto permissionsDto) {
         int result = permissionsMapper.deleteById(permissionsDto.getId());
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -84,9 +72,8 @@ public class PermissionsServiceImpl implements PermissionsService {
      */
     @Override
     public List<PermissionsDto> list() {
-        List<Permissions> permissions = permissionsMapper.selectList(null);
-        List<PermissionsDto> permissionsDtos = ColaBeanUtils.copyListProperties(permissions, PermissionsDto::new);
-        return permissionsDtos;
+        List<PermissionsPO> permissions = permissionsMapper.selectList(null);
+        return ColaBeanUtils.copyListProperties(permissions, PermissionsDto::new);
     }
 
 }

@@ -6,6 +6,7 @@ import com.bosssoft.entity.dto.RoleDto;
 import com.bosssoft.entity.vo.PerRoleVo;
 import com.bosssoft.entity.vo.RoleVo;
 import com.bosssoft.service.RoleService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +25,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/role")
 public class RoleController {
+
     @Autowired
     private RoleService roleService;
 
     /**
      * 查询角色列表
+     *
      * @return
      */
+    @ApiOperation(value = "查询角色列表")
     @GetMapping("/querylist")
     public String queryList() {
         List<RoleDto> list = roleService.list();
@@ -40,9 +44,11 @@ public class RoleController {
 
     /**
      * 更新角色
+     *
      * @param roleVo
      * @return
      */
+    @ApiOperation(value = "更新角色")
     @PostMapping("/updaterole")
     public String updateuser(@RequestBody RoleVo roleVo) {
         RoleDto roleDto = new RoleDto();
@@ -53,9 +59,11 @@ public class RoleController {
 
     /**
      * 添加角色
+     *
      * @param roleVo
      * @return
      */
+    @ApiOperation(value = "添加角色")
     @PostMapping("/addrole")
     public String adduser(@RequestBody RoleVo roleVo) {
         RoleDto roleDto = new RoleDto();
@@ -66,9 +74,11 @@ public class RoleController {
 
     /**
      * 删除角色
+     *
      * @param roleVo
      * @return
      */
+    @ApiOperation(value = "删除角色")
     @PostMapping("/removerole")
     public String removeuser(@RequestBody RoleVo roleVo) {
         RoleDto roleDto = new RoleDto();
@@ -79,9 +89,11 @@ public class RoleController {
 
     /**
      * 修改角色权限列表
+     *
      * @param perRoleVo
      * @return
      */
+    @ApiOperation(value = "修改角色权限列表")
     @PostMapping("/managepermisssions")
     public String managerole(@RequestBody PerRoleVo perRoleVo) {
         perRoleVo.setResult(roleService.managerole(perRoleVo));

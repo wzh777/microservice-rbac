@@ -1,7 +1,7 @@
 package com.bosssoft.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bosssoft.entity.po.UserRole;
+import com.bosssoft.entity.po.UserRolePO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Component;
  * @description
  */
 @Component
-public interface UserRoleMapper extends BaseMapper<UserRole> {
+public interface UserRoleMapper extends BaseMapper<UserRolePO> {
 }

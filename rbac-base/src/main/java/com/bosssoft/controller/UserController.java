@@ -8,6 +8,7 @@ import com.bosssoft.entity.vo.UserRoleVo;
 import com.bosssoft.entity.vo.UserUpdateVO;
 import com.bosssoft.entity.vo.UserVo;
 import com.bosssoft.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class UserController {
      *
      * @return String
      */
+    @ApiOperation(value = "查询用户列表")
     @GetMapping("/querylist")
     public String queryList() {
         List<UserDto> userDtolist = userService.list();
@@ -47,6 +49,7 @@ public class UserController {
      * @param userVo
      * @return String
      */
+    @ApiOperation(value = "登录")
     @PostMapping("/login")
     public String login(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
@@ -62,6 +65,7 @@ public class UserController {
      * @param userVo
      * @return String
      */
+    @ApiOperation(value = "通过名字查询用户")
     @PostMapping("/querybyname")
     public String querybyname(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
@@ -77,6 +81,7 @@ public class UserController {
      * @param userVo
      * @return String
      */
+    @ApiOperation(value = "更新用户")
     @PostMapping("/updateuser")
     public String updateuser(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
@@ -92,6 +97,7 @@ public class UserController {
      * @param userVo
      * @return String
      */
+    @ApiOperation(value = "添加用户")
     @PostMapping("/adduser")
     public String adduser(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
@@ -107,6 +113,7 @@ public class UserController {
      * @param userVo
      * @return String
      */
+    @ApiOperation(value = "删除用户")
     @PostMapping("/removeuser")
     public String removeuser(@RequestBody UserVo userVo) {
         UserDto userDto = new UserDto();
@@ -122,6 +129,7 @@ public class UserController {
      * @param userRoleVo
      * @return String
      */
+    @ApiOperation(value = "用户角色管理")
     @PostMapping("/managerole")
     public String managerole(@RequestBody UserRoleVo userRoleVo) {
         UserRoleUpdateVO userRoleUpdateVO = new UserRoleUpdateVO();

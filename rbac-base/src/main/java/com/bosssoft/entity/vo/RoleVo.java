@@ -1,7 +1,7 @@
 package com.bosssoft.entity.vo;
 
 
-import com.bosssoft.entity.po.Permissions;
+import com.bosssoft.entity.po.PermissionsPO;
 import lombok.Data;
 
 import java.util.List;
@@ -32,5 +32,5 @@ public class RoleVo {
     /**
      * 权限列表
      */
-    private List<Permissions> permissions;
+    private List<PermissionsPO> permissions;
 }

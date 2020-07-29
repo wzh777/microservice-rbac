@@ -1,6 +1,6 @@
 package com.bosssoft.entity.dto;
 
-import com.bosssoft.entity.po.Permissions;
+import com.bosssoft.entity.po.PermissionsPO;
 import lombok.Data;
 
 import java.util.List;
@@ -31,5 +31,5 @@ public class RoleDto {
     /**
      * 权限列表
      */
-    private List<Permissions> permissions;
+    private List<PermissionsPO> permissions;
 }

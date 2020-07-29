@@ -7,8 +7,8 @@
         <result property="name" column="name"/>
         <result property="pwd" column="pwd"/>
         <result property="email" column="email"/>
-        <collection property="roles" column="id" javaType="java.com.bosssoft.util.List" select="getroles"/>
-        <collection property="permissions" column="id" javaType="java.com.bosssoft.util.List" select="getper"/>
+        <collection property="roles" column="id" javaType="java.util.List" select="getroles"/>
+        <collection property="permissions" column="id" javaType="java.util.List" select="getper"/>
     </resultMap>
 
     <select id="getroles" resultType="RoleDto">

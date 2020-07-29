@@ -7,10 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rbac-base" />
-        <module name="rbac-common" />
         <module name="rbac-gateway" />
+        <module name="rbac-base" />
         <module name="rbac-redis" />
+        <module name="rbac-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">

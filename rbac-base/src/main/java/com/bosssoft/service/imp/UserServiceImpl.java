@@ -2,13 +2,13 @@ package com.bosssoft.service.imp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.bosssoft.service.UserService;
 import com.bosssoft.entity.dto.UserDto;
-import com.bosssoft.entity.po.User;
-import com.bosssoft.entity.po.UserRole;
+import com.bosssoft.entity.po.UserPO;
+import com.bosssoft.entity.po.UserRolePO;
 import com.bosssoft.entity.vo.UserRoleVo;
 import com.bosssoft.mapper.UserMapper;
 import com.bosssoft.mapper.UserRoleMapper;
-import com.bosssoft.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,14 +41,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean updateById(UserDto userDto) {
-        User user = new User();
+        UserPO user = new UserPO();
         BeanUtils.copyProperties(userDto, user);
         int result = userMapper.updateById(user);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -59,14 +55,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean save(UserDto userDto) {
-        User user = new User();
+        UserPO user = new UserPO();
         BeanUtils.copyProperties(userDto, user);
         int result = userMapper.insert(user);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -78,11 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removeById(UserDto userDto) {
         int result = userMapper.deleteById(userDto.getId());
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -93,8 +81,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<UserDto> list() {
-        List<UserDto> userDtos = userMapper.queryperList();
-        return userDtos;
+        return userMapper.queryperList();
     }
 
     /**
@@ -105,9 +92,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto getByName(UserDto userDto) {
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("name", userDto.getName());
-        User user = userMapper.selectOne(wrapper);
+        UserPO user = userMapper.selectOne(wrapper);
         if (user != null) {
             BeanUtils.copyProperties(user, userDto);
             userDto.setResult(true);
@@ -145,32 +132,27 @@ public class UserServiceImpl implements UserService {
     public boolean managerole(UserRoleVo userRoleVo) {
         // 对前端传输的数据进行分词，得到更新的角色列表
         String str = userRoleVo.getRoleList().toString();
-        int start = str.indexOf("[");
-        int end = str.indexOf("]");
+        int start = str.indexOf('[');
+        int end = str.indexOf(']');
         String[] split = str.substring(start + 1, end).split(", ");
         ArrayList<Integer> list = new ArrayList<>();
         for (String s : split) {
             list.add(Integer.parseInt(s));
         }
         // 删除原有的用户角色关系
-        UpdateWrapper<UserRole> wrapper = new UpdateWrapper<>();
+        UpdateWrapper<UserRolePO> wrapper = new UpdateWrapper<>();
         wrapper.eq("uid", userRoleVo.getId());
         userRoleMapper.delete(wrapper);
         // 插入新的用户角色关系，result用于记录插入是否成功
         int result = 0;
         for (Integer integer : list) {
-            UserRole userRole = new UserRole();
+            UserRolePO userRole = new UserRolePO();
             userRole.setRid(integer);
             userRole.setUid(userRoleVo.getId());
             userRoleMapper.insert(userRole);
             result++;
         }
-        if (result == list.size()) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return result == list.size();
     }
 
 }

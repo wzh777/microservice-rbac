@@ -2,13 +2,13 @@ package com.bosssoft.service.imp;
 
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.bosssoft.service.RoleService;
 import com.bosssoft.entity.dto.RoleDto;
-import com.bosssoft.entity.po.PerRole;
-import com.bosssoft.entity.po.Role;
+import com.bosssoft.entity.po.PerRolePO;
+import com.bosssoft.entity.po.RolePO;
 import com.bosssoft.entity.vo.PerRoleVo;
 import com.bosssoft.mapper.PerRoleMapper;
 import com.bosssoft.mapper.RoleMapper;
-import com.bosssoft.service.RoleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,14 +41,10 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public boolean updateById(RoleDto roleDto) {
-        Role role = new Role();
+        RolePO role = new RolePO();
         BeanUtils.copyProperties(roleDto, role);
         int result = roleMapper.updateById(role);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -59,14 +55,10 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public boolean save(RoleDto roleDto) {
-        Role role = new Role();
+        RolePO role = new RolePO();
         BeanUtils.copyProperties(roleDto, role);
         int result = roleMapper.insert(role);
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -78,11 +70,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public boolean removeById(RoleDto roleDto) {
         int result = roleMapper.deleteById(roleDto.getId());
-        if (result == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == 1;
     }
 
     /**
@@ -92,8 +80,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<RoleDto> list() {
-        List<RoleDto> queryperbyrole = roleMapper.queryperbyrole();
-        return queryperbyrole;
+        return roleMapper.queryperbyrole();
     }
 
     /**
@@ -106,32 +93,26 @@ public class RoleServiceImpl implements RoleService {
     public boolean managerole(PerRoleVo perRoleVo) {
         // 对前端传输的数据进行分词，得到更新的权限列表
         String str = perRoleVo.getPermissionsList().toString();
-        int start = str.indexOf("[");
-        int end = str.indexOf("]");
+        int start = str.indexOf('[');
+        int end = str.indexOf(']');
         String[] split = str.substring(start + 1, end).split(", ");
         ArrayList<Integer> list = new ArrayList<>();
         for (String s : split) {
             list.add(Integer.parseInt(s));
         }
         // 删除原有的用户角色关系
-        UpdateWrapper<PerRole> wrapper = new UpdateWrapper<>();
+        UpdateWrapper<PerRolePO> wrapper = new UpdateWrapper<>();
         wrapper.eq("rid", perRoleVo.getId());
         perRoleMapper.delete(wrapper);
         // 插入新的角色权限关系，result用于记录插入是否成功
         int result = 0;
         for (Integer integer : list) {
-            PerRole perRole = new PerRole();
+            PerRolePO perRole = new PerRolePO();
             perRole.setRid(perRoleVo.getId());
             perRole.setPid(integer);
             perRoleMapper.insert(perRole);
             result++;
         }
-        if (result == list.size()) {
-            return true;
-        } else {
-            return false;
-        }
+        return result == list.size();
     }
-
-
 }

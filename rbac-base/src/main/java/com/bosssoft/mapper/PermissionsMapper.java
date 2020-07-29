@@ -1,7 +1,7 @@
 package com.bosssoft.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bosssoft.entity.po.Permissions;
+import com.bosssoft.entity.po.PermissionsPO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Component;
  * @description
  */
 @Component
-public interface PermissionsMapper extends BaseMapper<Permissions> {
+public interface PermissionsMapper extends BaseMapper<PermissionsPO> {
 }

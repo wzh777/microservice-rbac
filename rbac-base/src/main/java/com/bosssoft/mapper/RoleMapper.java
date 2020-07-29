@@ -3,7 +3,7 @@ package com.bosssoft.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import com.bosssoft.entity.dto.RoleDto;
-import com.bosssoft.entity.po.Role;
+import com.bosssoft.entity.po.RolePO;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Component
 @Repository
-public interface RoleMapper extends BaseMapper<Role> {
+public interface RoleMapper extends BaseMapper<RolePO> {
     /**
      * 自定义一对多查询角色列表
      * @return
