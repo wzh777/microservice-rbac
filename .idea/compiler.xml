@@ -7,20 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="rbac-base" />
         <module name="rbac-common" />
         <module name="rbac-gateway" />
         <module name="rbac-redis" />
-        <module name="rbac-user" />
-        <module name="rbac-permissions" />
-        <module name="rbac-role" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="rbac-permissions" target="1.8" />
       <module name="rbac-redis" target="1.8" />
+      <module name="rbac-role" target="1.8" />
+      <module name="rbac-user" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="rbac-base" options="-parameters" />
       <module name="rbac-gateway" options="-parameters" />
       <module name="rbac-permissions" options="-parameters" />
       <module name="rbac-redis" options="-parameters" />

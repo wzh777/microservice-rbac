@@ -5,10 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/rbac-user/pom.xml" />
-        <option value="$PROJECT_DIR$/rbac-role/pom.xml" />
-        <option value="$PROJECT_DIR$/rbac-permissions/pom.xml" />
         <option value="$PROJECT_DIR$/rbac-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/rbac-base/pom.xml" />
       </list>
     </option>
   </component>

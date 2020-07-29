@@ -1,5 +1,6 @@
 package com.bosssoft;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -8,10 +9,11 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @SpringBootApplication
 @EnableDiscoveryClient
 @RefreshScope
-public class RbacGatewayApplication {
+@MapperScan("com.bosssoft.mapper")
+public class RbacBaseApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RbacGatewayApplication.class, args);
+        SpringApplication.run(RbacBaseApplication.class, args);
     }
 
 }
