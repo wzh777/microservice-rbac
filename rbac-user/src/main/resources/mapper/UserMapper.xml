@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bosssoft.mapper.UserMapper">
+
+    <resultMap id="userpe" type="UserDto">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="pwd" column="pwd"/>
+        <result property="email" column="email"/>
+        <collection property="roles" column="id" javaType="java.util.List" select="getroles"/>
+        <collection property="permissions" column="id" javaType="java.util.List" select="getper"/>
+    </resultMap>
+
+    <select id="getroles" resultType="RoleDto">
+        select r1.id,r1.type
+        from role r1 ,user_role r2
+        where r2.uid = #{id} and r1.id = r2.rid and  r2.deleted = 0 and r1.deleted = 0
+    </select>
+
+    <select id="getper" resultType="PermissionsDto">
+        select p1.id,p1.name,p1.url
+        from user_role r2,permissions p1 , per_role p2
+        where r2.uid = #{id} and r2.rid = p2.rid and p2.pid = p1.id and r2.deleted = 0
+        and p2.deleted = 0 and p1.deleted = 0
+    </select>
+
+    <select id="queryper" resultMap="userpe">
+        select * from user where name=#{name}
+    </select>
+
+    <select id="queryperList" resultMap="userpe">
+        select * from user where deleted = 0
+    </select>
+
+</mapper>
