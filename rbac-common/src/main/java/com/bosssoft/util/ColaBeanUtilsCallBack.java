@@ -1,4 +1,4 @@
-package util;
+package com.bosssoft.util;
 
 /**
  * @author 吴志鸿

@@ -1,4 +1,4 @@
-package util;
+package com.bosssoft.util;
 
 import org.springframework.beans.BeanUtils;
 
