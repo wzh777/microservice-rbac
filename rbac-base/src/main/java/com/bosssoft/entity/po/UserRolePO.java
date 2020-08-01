@@ -12,6 +12,7 @@ import java.util.Date;
  * @description
  */
 @Data
+@TableName(value = "user_role")
 public class UserRolePO implements Serializable {
 
     private static final long serialVersionUID = 1L;

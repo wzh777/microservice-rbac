@@ -4,7 +4,9 @@ package com.bosssoft.controller;
 import com.alibaba.fastjson.JSON;
 import com.bosssoft.entity.dto.PermissionsDto;
 import com.bosssoft.entity.vo.PermissionsVo;
+import com.bosssoft.myenum.ResultType;
 import com.bosssoft.service.PermissionsService;
+import com.bosssoft.util.ResponseUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class PermissionsController {
     public String queryList() {
         List<PermissionsDto> list = permissionsService.list();
         List<PermissionsVo> permissionsVos = ColaBeanUtils.copyListProperties(list, PermissionsVo::new);
-        return JSON.toJSONString(permissionsVos);
+        return ResponseUtil.getResponse(permissionsVos, ResultType.SUCCESS);
     }
 
     /**
@@ -53,7 +55,7 @@ public class PermissionsController {
         PermissionsDto permissionsDto = new PermissionsDto();
         BeanUtils.copyProperties(permissionsVo, permissionsDto);
         permissionsVo.setResult(permissionsService.updateById(permissionsDto));
-        return JSON.toJSONString(permissionsVo);
+        return ResponseUtil.getResponse(permissionsVo, ResultType.SUCCESS);
     }
 
     /**
@@ -68,7 +70,7 @@ public class PermissionsController {
         PermissionsDto permissionsDto = new PermissionsDto();
         BeanUtils.copyProperties(permissionsVo, permissionsDto);
         permissionsVo.setResult(permissionsService.save(permissionsDto));
-        return JSON.toJSONString(permissionsVo);
+        return ResponseUtil.getResponse(permissionsVo, ResultType.SUCCESS);
     }
 
     /**
@@ -83,7 +85,7 @@ public class PermissionsController {
         PermissionsDto permissionsDto = new PermissionsDto();
         BeanUtils.copyProperties(permissionsVo, permissionsDto);
         permissionsVo.setResult(permissionsService.removeById(permissionsDto));
-        return JSON.toJSONString(permissionsVo);
+        return ResponseUtil.getResponse(permissionsVo, ResultType.SUCCESS);
     }
 
 }

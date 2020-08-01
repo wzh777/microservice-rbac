@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.bosssoft.entity.dto.RoleDto;
 import com.bosssoft.entity.vo.PerRoleVo;
 import com.bosssoft.entity.vo.RoleVo;
+import com.bosssoft.myenum.ResultType;
 import com.bosssoft.service.RoleService;
+import com.bosssoft.util.ResponseUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class RoleController {
     public String queryList() {
         List<RoleDto> list = roleService.list();
         List<RoleVo> roleVos = ColaBeanUtils.copyListProperties(list, RoleVo::new);
-        return JSON.toJSONString(roleVos);
+        return ResponseUtil.getResponse(roleVos, ResultType.SUCCESS);
     }
 
     /**
@@ -54,7 +56,7 @@ public class RoleController {
         RoleDto roleDto = new RoleDto();
         BeanUtils.copyProperties(roleVo, roleDto);
         roleVo.setResult(roleService.updateById(roleDto));
-        return JSON.toJSONString(roleVo);
+        return ResponseUtil.getResponse(roleVo, ResultType.SUCCESS);
     }
 
     /**
@@ -69,7 +71,7 @@ public class RoleController {
         RoleDto roleDto = new RoleDto();
         BeanUtils.copyProperties(roleVo, roleDto);
         roleVo.setResult(roleService.save(roleDto));
-        return JSON.toJSONString(roleVo);
+        return ResponseUtil.getResponse(roleVo, ResultType.SUCCESS);
     }
 
     /**
@@ -84,7 +86,7 @@ public class RoleController {
         RoleDto roleDto = new RoleDto();
         BeanUtils.copyProperties(roleVo, roleDto);
         roleVo.setResult(roleService.removeById(roleDto));
-        return JSON.toJSONString(roleVo);
+        return ResponseUtil.getResponse(roleVo, ResultType.SUCCESS);
     }
 
     /**
@@ -97,7 +99,7 @@ public class RoleController {
     @PostMapping("/managepermisssions")
     public String managerole(@RequestBody PerRoleVo perRoleVo) {
         perRoleVo.setResult(roleService.managerole(perRoleVo));
-        return JSON.toJSONString(perRoleVo);
+        return ResponseUtil.getResponse(perRoleVo, ResultType.SUCCESS);
     }
 
 }

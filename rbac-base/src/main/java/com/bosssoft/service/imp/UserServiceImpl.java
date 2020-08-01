@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -92,16 +93,16 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto getByName(UserDto userDto) {
-        QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
-        wrapper.eq("name", userDto.getName());
-        UserPO user = userMapper.selectOne(wrapper);
+//        QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
+//        wrapper.eq("name", userDto.getName());
+//        UserPO user = userMapper.selectOne(wrapper);
+        UserDto user = userMapper.queryper(userDto.getName());
         if (user != null) {
-            BeanUtils.copyProperties(user, userDto);
-            userDto.setResult(true);
+            user.setResult(true);
         } else {
-            userDto.setResult(false);
+            user.setResult(false);
         }
-        return userDto;
+        return user;
     }
 
     /**
@@ -118,7 +119,7 @@ public class UserServiceImpl implements UserService {
             BeanUtils.copyProperties(user, userDto1);
             userDto1.setLoginmark(true);
             if (userDto.getPwd().equals(user.getPwd())) {
-                userDto1.setResult(true);
+                userDto1.setToken(UUID.randomUUID().toString());
             } else {
                 userDto1.setResult(false);
             }

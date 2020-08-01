@@ -1,5 +1,6 @@
 package com.bosssoft.util;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bosssoft.Reponse.Response;
 import com.bosssoft.myenum.ResultType;
@@ -18,7 +19,7 @@ public class ResponseUtil {
         outputParam.setData(content);
         outputParam.setStatus(code.getCode());
         outputParam.setMsg(code.getMsg());
-        return JSONObject.toJSONString(outputParam);
+        return JSON.toJSONString(outputParam);
     }
 
     public static String getResponse(ResultType code) {
@@ -26,7 +27,7 @@ public class ResponseUtil {
         outputParam.setData(new Object());
         outputParam.setStatus(code.getCode());
         outputParam.setMsg(code.getMsg());
-        return JSONObject.toJSONString(outputParam);
+        return JSON.toJSONString(outputParam);
     }
 
     public static String getResponse(Integer code, String msg, Object content) {
@@ -34,7 +35,7 @@ public class ResponseUtil {
         outputParam.setData(content);
         outputParam.setStatus(code);
         outputParam.setMsg(msg);
-        return JSONObject.toJSONString(outputParam);
+        return JSON.toJSONString(outputParam);
     }
 
     public static String getResponse(Integer code, String msg) {
@@ -42,7 +43,7 @@ public class ResponseUtil {
         outputParam.setData(new Object());
         outputParam.setStatus(code);
         outputParam.setMsg(msg);
-        return JSONObject.toJSONString(outputParam);
+        return JSON.toJSONString(outputParam);
     }
 
 }

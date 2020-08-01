@@ -58,4 +58,6 @@ public class UserDto {
      * 权限列表
      */
     private List<PermissionsPO> permissions;
+
+    private String token;
 }

@@ -17,6 +17,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName(value = "permissions")
 public class PermissionsPO implements Serializable {
 
     private static final long serialVersionUID = 1L;

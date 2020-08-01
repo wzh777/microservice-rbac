@@ -7,7 +7,9 @@ import com.bosssoft.entity.vo.UserRoleUpdateVO;
 import com.bosssoft.entity.vo.UserRoleVo;
 import com.bosssoft.entity.vo.UserUpdateVO;
 import com.bosssoft.entity.vo.UserVo;
+import com.bosssoft.myenum.ResultType;
 import com.bosssoft.service.UserService;
+import com.bosssoft.util.ResponseUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,11 @@ public class UserController {
     public String queryList() {
         List<UserDto> userDtolist = userService.list();
         List<UserVo> userVos = ColaBeanUtils.copyListProperties(userDtolist, UserVo::new);
-        return JSON.toJSONString(userVos);
+        if (userVos == null){
+            return ResponseUtil.getResponse(null, ResultType.SUCCESS);
+        }else {
+            return ResponseUtil.getResponse(userVos, ResultType.SUCCESS);
+        }
     }
 
     /**
@@ -56,7 +62,11 @@ public class UserController {
         BeanUtils.copyProperties(userVo, userDto);
         UserDto userDto1 = userService.login(userDto);
         BeanUtils.copyProperties(userDto1, userVo);
-        return JSON.toJSONString(userVo);
+        if (userDto1 == null){
+            return ResponseUtil.getResponse(userVo, ResultType.FORBIDDEN);
+        }else {
+            return ResponseUtil.getResponse(userVo, ResultType.SUCCESS);
+        }
     }
 
     /**
@@ -68,11 +78,17 @@ public class UserController {
     @ApiOperation(value = "通过名字查询用户")
     @PostMapping("/querybyname")
     public String querybyname(@RequestBody UserVo userVo) {
+        System.out.println(userVo);
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userVo, userDto);
         UserDto userDto1 = userService.getByName(userDto);
         BeanUtils.copyProperties(userDto1, userVo);
-        return JSON.toJSONString(userVo);
+        System.out.println(userVo);
+        if (userDto1 == null){
+            return ResponseUtil.getResponse(null, ResultType.SUCCESS);
+        }else {
+            return ResponseUtil.getResponse(userVo, ResultType.SUCCESS);
+        }
     }
 
     /**
@@ -104,7 +120,7 @@ public class UserController {
         BeanUtils.copyProperties(userVo, userDto);
         UserUpdateVO userUpdateVO = new UserUpdateVO();
         userUpdateVO.setResult(userService.save(userDto));
-        return JSON.toJSONString(userUpdateVO);
+        return ResponseUtil.getResponse(userUpdateVO, ResultType.SUCCESS);
     }
 
     /**
@@ -120,7 +136,7 @@ public class UserController {
         BeanUtils.copyProperties(userVo, userDto);
         UserUpdateVO userUpdateVO = new UserUpdateVO();
         userUpdateVO.setResult(userService.removeById(userDto));
-        return JSON.toJSONString(userUpdateVO);
+        return ResponseUtil.getResponse(userUpdateVO, ResultType.SUCCESS);
     }
 
     /**
@@ -134,7 +150,7 @@ public class UserController {
     public String managerole(@RequestBody UserRoleVo userRoleVo) {
         UserRoleUpdateVO userRoleUpdateVO = new UserRoleUpdateVO();
         userRoleUpdateVO.setResult(userService.managerole(userRoleVo));
-        return JSON.toJSONString(userRoleUpdateVO);
+        return ResponseUtil.getResponse(userRoleUpdateVO, ResultType.SUCCESS);
     }
 
 }

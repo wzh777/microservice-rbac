@@ -59,4 +59,7 @@ public class UserVo {
      */
     private List<PermissionsPO> permissions;
 
+    private String token;
+
+    private Integer code;
 }

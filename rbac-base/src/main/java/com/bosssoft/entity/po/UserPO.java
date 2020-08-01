@@ -17,6 +17,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName(value = "user")
 public class UserPO implements Serializable {
 
     private static final long serialVersionUID = 1L;

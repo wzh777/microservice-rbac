@@ -91,6 +91,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public boolean managerole(PerRoleVo perRoleVo) {
+        System.out.println(perRoleVo);
         // 对前端传输的数据进行分词，得到更新的权限列表
         String str = perRoleVo.getPermissionsList().toString();
         int start = str.indexOf('[');

@@ -2,6 +2,7 @@ package com.bosssoft.entity.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.Value;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @description
  */
 @Data
+@TableName(value = "per_role")
 public class PerRolePO implements Serializable {
     private static final long serialVersionUID = 1L;
 
